@@ -23327,8 +23327,8 @@ function validateMarkdown(content) {
     frontmatter.tags.forEach((tag) => {
       if (typeof tag !== "string") {
         errors.push("Tags must be strings");
-      } else if (tag.length > 20) {
-        errors.push(`Tag "${tag}" must be less than 20 characters`);
+      } else if (tag.length > 30) {
+        errors.push(`Tag "${tag}" must be less than 30 characters`);
       }
     });
   }

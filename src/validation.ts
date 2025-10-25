@@ -39,8 +39,8 @@ export function validateMarkdown(content: string): ValidationResult {
     frontmatter.tags.forEach((tag: unknown) => {
       if (typeof tag !== 'string') {
         errors.push('Tags must be strings')
-      } else if (tag.length > 20) {
-        errors.push(`Tag "${tag}" must be less than 20 characters`)
+      } else if (tag.length > 30) {
+        errors.push(`Tag "${tag}" must be less than 30 characters`)
       }
     })
   }
@@ -61,18 +61,18 @@ export function validateMarkdown(content: string): ValidationResult {
 
 export function parseMarkdown(content: string): ArticleMetadata {
   const { data: frontmatter, content: markdownContent } = matter(content)
-  
+
   // Parse title and subtitle
   let title = frontmatter.title || ''
   let subtitle = frontmatter.subtitle
-  
+
   // If subtitle is not explicitly provided, check if title contains ": " separator
   if (!subtitle && title.includes(': ')) {
     const parts = title.split(': ')
     title = parts[0]
     subtitle = parts.slice(1).join(': ') // Handle cases where subtitle might also contain ": "
   }
-  
+
   return {
     title,
     subtitle,
