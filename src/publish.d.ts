@@ -4,6 +4,7 @@ export interface PublishOptions extends ArticleMetadata {
   token: string
   publicationId: string
   isDraft: boolean
+  existingDraftId?: string
 }
 
 export interface PublishResponse {

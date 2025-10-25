@@ -37,6 +37,8 @@ describe('GitHub Action', () => {
       tags: ['test'],
       articleId: undefined,
       draftId: undefined,
+      canonicalUrl: undefined,
+      coverImage: undefined,
     }
     const mockPublishResponse = {
       draftId: 'draft-id-123',
@@ -87,6 +89,8 @@ describe('GitHub Action', () => {
       tags: ['test'],
       articleId: undefined,
       draftId: undefined,
+      canonicalUrl: undefined,
+      coverImage: undefined,
     }
     const mockPublishResponse = {
       articleId: 'article-id-456',
@@ -137,6 +141,8 @@ describe('GitHub Action', () => {
       tags: ['test'],
       articleId: undefined,
       draftId: 'draft-id-456',
+      canonicalUrl: undefined,
+      coverImage: undefined,
     }
     const mockPublishResponse = {
       articleId: 'article-id-789',
@@ -187,6 +193,8 @@ describe('GitHub Action', () => {
       tags: ['test'],
       articleId: undefined,
       draftId: 'draft-id-456',
+      canonicalUrl: undefined,
+      coverImage: undefined,
     }
 
     vi.mocked(core.getInput).mockImplementation((name: string) => {
@@ -223,6 +231,8 @@ describe('GitHub Action', () => {
       tags: ['test'],
       articleId: 'article-id-123',
       draftId: undefined,
+      canonicalUrl: undefined,
+      coverImage: undefined,
     }
 
     vi.mocked(core.getInput).mockImplementation((name: string) => {
@@ -287,6 +297,8 @@ describe('GitHub Action', () => {
       tags: ['test'],
       articleId: undefined,
       draftId: undefined,
+      canonicalUrl: undefined,
+      coverImage: undefined,
     }
 
     vi.mocked(core.getInput).mockImplementation((name: string) => {
@@ -361,6 +373,8 @@ describe('GitHub Action', () => {
       tags: ['test'],
       articleId: undefined,
       draftId: undefined,
+      canonicalUrl: undefined,
+      coverImage: undefined,
     }
     const mockPublishResponse = {
       articleId: 'article-id-123',

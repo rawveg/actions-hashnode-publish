@@ -23350,7 +23350,9 @@ function parseMarkdown(content) {
     content: markdownContent.trim(),
     tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
     articleId: frontmatter.articleId,
-    draftId: frontmatter.draftId
+    draftId: frontmatter.draftId,
+    canonicalUrl: frontmatter.canonicalUrl,
+    coverImage: frontmatter.coverImage
   };
 }
 
@@ -23411,7 +23413,7 @@ async function makeHashnodeRequest(token, query, variables) {
   return result.data;
 }
 async function publishToHashnode(options2) {
-  const { token, publicationId, title, content, tags = [], isDraft, existingDraftId } = options2;
+  const { token, publicationId, title, content, tags = [], isDraft, existingDraftId, canonicalUrl, coverImage } = options2;
   let mutation;
   let mutationVariables;
   let result;
@@ -23429,6 +23431,8 @@ async function publishToHashnode(options2) {
       input: {
         title,
         contentMarkdown: content,
+        originalArticleURL: canonicalUrl,
+        coverImageOptions: coverImage ? { coverImageURL: coverImage } : void 0,
         publicationId,
         tags: tags.map(createTagInput)
       }
@@ -23444,6 +23448,8 @@ async function publishToHashnode(options2) {
       input: {
         title,
         contentMarkdown: content,
+        originalArticleURL: canonicalUrl,
+        coverImageOptions: coverImage ? { coverImageURL: coverImage } : void 0,
         publicationId,
         tags: tags.map(createTagInput)
       }

@@ -100,7 +100,9 @@ This is the content.`
       content: 'This is the content.',
       tags: ['test', 'markdown'],
       articleId: 'article123',
-      draftId: 'draft456'
+      draftId: 'draft456',
+      canonicalUrl: undefined,
+      coverImage: undefined
     })
   })
 
@@ -116,7 +118,30 @@ This is the content.`
       content: 'This is the content.',
       tags: [],
       articleId: undefined,
-      draftId: undefined
+      draftId: undefined,
+      canonicalUrl: undefined,
+      coverImage: undefined
+    })
+  })
+
+  it('should parse markdown with canonicalUrl and coverImage', () => {
+    const content = `---
+title: "Test Article"
+tags: ["test"]
+canonicalUrl: "https://example.com/original"
+coverImage: "https://example.com/cover.jpg"
+---
+
+This is the content.`
+    const result = parseMarkdown(content)
+    expect(result).toEqual({
+      title: 'Test Article',
+      content: 'This is the content.',
+      tags: ['test'],
+      articleId: undefined,
+      draftId: undefined,
+      canonicalUrl: 'https://example.com/original',
+      coverImage: 'https://example.com/cover.jpg'
     })
   })
 })

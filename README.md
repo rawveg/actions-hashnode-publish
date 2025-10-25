@@ -26,6 +26,8 @@ Your markdown files should include frontmatter with the following format:
 ---
 title: "Your Article Title"
 tags: ["tag1", "tag2", "tag3"]
+coverImage: "https://example.com/cover.jpg"  # Optional: Cover image URL
+canonicalUrl: "https://example.com/original-article"  # Optional: Original source URL
 articleId: "123"      # Optional: ID of an existing article
 draftId: "456"        # Optional: ID of an existing draft
 ---
@@ -39,14 +41,18 @@ Your article content here...
 |-------|-------------|----------|
 | `title` | Article title (max 100 chars) | Yes |
 | `tags` | Array of tags (max 5, each max 20 chars) | Yes |
+| `coverImage` | URL to the cover image for the article | No |
+| `canonicalUrl` | Original source URL for cross-posted content | No |
 | `articleId` | ID of an existing article (for updates) | No |
 | `draftId` | ID of an existing draft (for updates) | No |
 
-The `articleId` and `draftId` fields are used to update existing articles or drafts:
+**Field Usage:**
 
-- Use `articleId` when updating a published article
-- Use `draftId` when updating an existing draft
-- These fields are automatically populated when you create drafts or publish articles
+- **`coverImage`**: URL to an image that will be used as the cover/hero image for your article. Must be a publicly accessible URL.
+- **`canonicalUrl`**: Specify the original source URL when cross-posting content from another site. This helps with SEO and gives proper attribution.
+- **`articleId`**: ID of an existing published article. Automatically populated after publishing.
+- **`draftId`**: ID of an existing draft. Automatically populated after creating a draft.
+- These ID fields are used to track and update existing content
 
 ## CLI Usage
 

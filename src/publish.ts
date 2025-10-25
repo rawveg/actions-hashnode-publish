@@ -130,7 +130,7 @@ async function makeHashnodeRequest(
 }
 
 export async function publishToHashnode(options: PublishOptions): Promise<PublishResponse> {
-  const { token, publicationId, title, content, tags = [], isDraft, existingDraftId } = options
+  const { token, publicationId, title, content, tags = [], isDraft, existingDraftId, canonicalUrl, coverImage } = options
 
   let mutation;
   let mutationVariables;
@@ -154,6 +154,8 @@ export async function publishToHashnode(options: PublishOptions): Promise<Publis
       input: {
         title,
         contentMarkdown: content,
+        originalArticleURL: canonicalUrl,
+        coverImageOptions: coverImage ? { coverImageURL: coverImage } : undefined,
         publicationId,
         tags: tags.map(createTagInput)
       }
@@ -170,6 +172,8 @@ export async function publishToHashnode(options: PublishOptions): Promise<Publis
        input: {
          title,
          contentMarkdown: content,
+         originalArticleURL: canonicalUrl,
+         coverImageOptions: coverImage ? { coverImageURL: coverImage } : undefined,
          publicationId,
          tags: tags.map(createTagInput)
        }

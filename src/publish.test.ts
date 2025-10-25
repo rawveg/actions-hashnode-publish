@@ -52,6 +52,8 @@ describe('publishToHashnode', () => {
             input: {
               title: 'Test Article',
               contentMarkdown: 'Test content',
+              originalArticleURL: undefined,
+              coverImageOptions: undefined,
               publicationId: 'test-pub',
               tags: [{ name: 'test', slug: 'test' }]
             }
@@ -108,6 +110,8 @@ describe('publishToHashnode', () => {
             input: {
               title: 'Test Article',
               contentMarkdown: 'Test content',
+              originalArticleURL: undefined,
+              coverImageOptions: undefined,
               publicationId: 'test-pub',
               tags: [{ name: 'test', slug: 'test' }]
             }
@@ -194,5 +198,40 @@ describe('publishToHashnode', () => {
       tags: ['test'],
       isDraft: false
     })).rejects.toThrow('Hashnode API error: [{"message":"Bad Request"}]')
+  })
+
+  it('should include canonicalUrl and coverImage when provided', async () => {
+    const mockResponse = {
+      data: {
+        publishPost: {
+          post: {
+            id: 'article-id-123',
+            title: 'Test Article'
+          }
+        }
+      }
+    }
+
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockResponse
+    })
+
+    await publishToHashnode({
+      token: 'test-token',
+      publicationId: 'test-pub',
+      title: 'Test Article',
+      content: 'Test content',
+      tags: ['test'],
+      isDraft: false,
+      canonicalUrl: 'https://example.com/original',
+      coverImage: 'https://example.com/cover.jpg'
+    })
+
+    const callBody = JSON.parse(mockFetch.mock.calls[0][1].body)
+    expect(callBody.variables.input.originalArticleURL).toBe('https://example.com/original')
+    expect(callBody.variables.input.coverImageOptions).toEqual({
+      coverImageURL: 'https://example.com/cover.jpg'
+    })
   })
 })

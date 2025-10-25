@@ -11,6 +11,8 @@ export interface ArticleMetadata {
   tags: string[]
   articleId?: string
   draftId?: string
+  canonicalUrl?: string
+  coverImage?: string
 }
 
 export function validateMarkdown(content: string): ValidationResult {
@@ -64,5 +66,7 @@ export function parseMarkdown(content: string): ArticleMetadata {
     tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
     articleId: frontmatter.articleId,
     draftId: frontmatter.draftId,
+    canonicalUrl: frontmatter.canonicalUrl,
+    coverImage: frontmatter.coverImage,
   }
 }
