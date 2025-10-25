@@ -42,7 +42,7 @@ Your article content here...
 |-------|-------------|----------|
 | `title` | Article title (max 100 chars) | Yes |
 | `subtitle` | Article subtitle (can also be specified in title as "Title: Subtitle") | No |
-| `tags` | Array of tags (max 5, each max 20 chars) | Yes |
+| `tags` | Array of tags (max 5, each max 30 chars) | Yes |
 | `coverImage` | URL to the cover image for the article | No |
 | `canonicalUrl` | Original source URL for cross-posted content | No |
 | `articleId` | ID of an existing article (for updates) | No |
