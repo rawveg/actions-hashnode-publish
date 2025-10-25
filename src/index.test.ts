@@ -33,6 +33,7 @@ describe('GitHub Action', () => {
     const mockValidation = { isValid: true, errors: [] }
     const mockMetadata = {
       title: 'Test Article',
+      subtitle: undefined,
       content: 'test content',
       tags: ['test'],
       articleId: undefined,
@@ -85,6 +86,7 @@ describe('GitHub Action', () => {
     const mockValidation = { isValid: true, errors: [] }
     const mockMetadata = {
       title: 'Test Article',
+      subtitle: undefined,
       content: 'test content',
       tags: ['test'],
       articleId: undefined,
@@ -137,6 +139,7 @@ describe('GitHub Action', () => {
     const mockValidation = { isValid: true, errors: [] }
     const mockMetadata = {
       title: 'Test Article (Draft)',
+      subtitle: undefined,
       content: 'test content',
       tags: ['test'],
       articleId: undefined,
@@ -189,6 +192,7 @@ describe('GitHub Action', () => {
     const mockValidation = { isValid: true, errors: [] }
     const mockMetadata = {
       title: 'Test Article (Draft)',
+      subtitle: undefined,
       content: 'test content',
       tags: ['test'],
       articleId: undefined,
@@ -227,6 +231,7 @@ describe('GitHub Action', () => {
     const mockValidation = { isValid: true, errors: [] }
     const mockMetadata = {
       title: 'Test Article (Published)',
+      subtitle: undefined,
       content: 'test content',
       tags: ['test'],
       articleId: 'article-id-123',
@@ -293,6 +298,7 @@ describe('GitHub Action', () => {
     const mockValidation = { isValid: true, errors: [] }
     const mockMetadata = {
       title: 'Test Article',
+      subtitle: undefined,
       content: 'test content',
       tags: ['test'],
       articleId: undefined,
@@ -369,6 +375,7 @@ describe('GitHub Action', () => {
     const mockValidation = { isValid: true, errors: [] }
     const mockMetadata = {
       title: 'Test Article',
+      subtitle: undefined,
       content: 'test content',
       tags: ['test'],
       articleId: undefined,

@@ -234,4 +234,36 @@ describe('publishToHashnode', () => {
       coverImageURL: 'https://example.com/cover.jpg'
     })
   })
+
+  it('should include subtitle when provided', async () => {
+    const mockResponse = {
+      data: {
+        publishPost: {
+          post: {
+            id: 'article-id-123',
+            title: 'Test Article'
+          }
+        }
+      }
+    }
+
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockResponse
+    })
+
+    await publishToHashnode({
+      token: 'test-token',
+      publicationId: 'test-pub',
+      title: 'Test Article',
+      subtitle: 'Test Subtitle',
+      content: 'Test content',
+      tags: ['test'],
+      isDraft: false
+    })
+
+    const callBody = JSON.parse(mockFetch.mock.calls[0][1].body)
+    expect(callBody.variables.input.title).toBe('Test Article')
+    expect(callBody.variables.input.subtitle).toBe('Test Subtitle')
+  })
 })

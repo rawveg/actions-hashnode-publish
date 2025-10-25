@@ -7,6 +7,7 @@ export interface ValidationResult {
 
 export interface ArticleMetadata {
   title: string
+  subtitle?: string
   content: string
   tags: string[]
   articleId?: string
@@ -60,8 +61,21 @@ export function validateMarkdown(content: string): ValidationResult {
 
 export function parseMarkdown(content: string): ArticleMetadata {
   const { data: frontmatter, content: markdownContent } = matter(content)
+  
+  // Parse title and subtitle
+  let title = frontmatter.title || ''
+  let subtitle = frontmatter.subtitle
+  
+  // If subtitle is not explicitly provided, check if title contains ": " separator
+  if (!subtitle && title.includes(': ')) {
+    const parts = title.split(': ')
+    title = parts[0]
+    subtitle = parts.slice(1).join(': ') // Handle cases where subtitle might also contain ": "
+  }
+  
   return {
-    title: frontmatter.title || '',
+    title,
+    subtitle,
     content: markdownContent.trim(),
     tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
     articleId: frontmatter.articleId,

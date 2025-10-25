@@ -25,6 +25,7 @@ Your markdown files should include frontmatter with the following format:
 ```markdown
 ---
 title: "Your Article Title"
+subtitle: "Your Article Subtitle"  # Optional: Article subtitle
 tags: ["tag1", "tag2", "tag3"]
 coverImage: "https://example.com/cover.jpg"  # Optional: Cover image URL
 canonicalUrl: "https://example.com/original-article"  # Optional: Original source URL
@@ -40,6 +41,7 @@ Your article content here...
 | Field | Description | Required |
 |-------|-------------|----------|
 | `title` | Article title (max 100 chars) | Yes |
+| `subtitle` | Article subtitle (can also be specified in title as "Title: Subtitle") | No |
 | `tags` | Array of tags (max 5, each max 20 chars) | Yes |
 | `coverImage` | URL to the cover image for the article | No |
 | `canonicalUrl` | Original source URL for cross-posted content | No |
@@ -48,6 +50,10 @@ Your article content here...
 
 **Field Usage:**
 
+- **`subtitle`**: Optional subtitle for your article. You can specify it in two ways:
+  - Explicitly in the frontmatter: `subtitle: "My Subtitle"`
+  - Embedded in the title using a colon separator: `title: "My Title: My Subtitle"`
+  - If both are present, the explicit `subtitle` field takes precedence
 - **`coverImage`**: URL to an image that will be used as the cover/hero image for your article. Must be a publicly accessible URL.
 - **`canonicalUrl`**: Specify the original source URL when cross-posting content from another site. This helps with SEO and gives proper attribution.
 - **`articleId`**: ID of an existing published article. Automatically populated after publishing.

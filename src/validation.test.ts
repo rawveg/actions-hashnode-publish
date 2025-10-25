@@ -97,6 +97,7 @@ This is the content.`
     const result = parseMarkdown(content)
     expect(result).toEqual({
       title: 'Test Article',
+      subtitle: undefined,
       content: 'This is the content.',
       tags: ['test', 'markdown'],
       articleId: 'article123',
@@ -115,6 +116,7 @@ This is the content.`
     const result = parseMarkdown(content)
     expect(result).toEqual({
       title: 'Test Article',
+      subtitle: undefined,
       content: 'This is the content.',
       tags: [],
       articleId: undefined,
@@ -136,12 +138,95 @@ This is the content.`
     const result = parseMarkdown(content)
     expect(result).toEqual({
       title: 'Test Article',
+      subtitle: undefined,
       content: 'This is the content.',
       tags: ['test'],
       articleId: undefined,
       draftId: undefined,
       canonicalUrl: 'https://example.com/original',
       coverImage: 'https://example.com/cover.jpg'
+    })
+  })
+
+  it('should parse subtitle from explicit frontmatter field', () => {
+    const content = `---
+title: "Test Article"
+subtitle: "Test Subtitle"
+tags: ["test"]
+---
+
+This is the content.`
+    const result = parseMarkdown(content)
+    expect(result).toEqual({
+      title: 'Test Article',
+      subtitle: 'Test Subtitle',
+      content: 'This is the content.',
+      tags: ['test'],
+      articleId: undefined,
+      draftId: undefined,
+      canonicalUrl: undefined,
+      coverImage: undefined
+    })
+  })
+
+  it('should parse subtitle from title with colon separator', () => {
+    const content = `---
+title: "Test Article: Test Subtitle"
+tags: ["test"]
+---
+
+This is the content.`
+    const result = parseMarkdown(content)
+    expect(result).toEqual({
+      title: 'Test Article',
+      subtitle: 'Test Subtitle',
+      content: 'This is the content.',
+      tags: ['test'],
+      articleId: undefined,
+      draftId: undefined,
+      canonicalUrl: undefined,
+      coverImage: undefined
+    })
+  })
+
+  it('should handle multiple colons in title correctly', () => {
+    const content = `---
+title: "Test Article: Subtitle Part 1: Subtitle Part 2"
+tags: ["test"]
+---
+
+This is the content.`
+    const result = parseMarkdown(content)
+    expect(result).toEqual({
+      title: 'Test Article',
+      subtitle: 'Subtitle Part 1: Subtitle Part 2',
+      content: 'This is the content.',
+      tags: ['test'],
+      articleId: undefined,
+      draftId: undefined,
+      canonicalUrl: undefined,
+      coverImage: undefined
+    })
+  })
+
+  it('should prefer explicit subtitle over title parsing', () => {
+    const content = `---
+title: "Test Article: Title Subtitle"
+subtitle: "Explicit Subtitle"
+tags: ["test"]
+---
+
+This is the content.`
+    const result = parseMarkdown(content)
+    expect(result).toEqual({
+      title: 'Test Article: Title Subtitle',
+      subtitle: 'Explicit Subtitle',
+      content: 'This is the content.',
+      tags: ['test'],
+      articleId: undefined,
+      draftId: undefined,
+      canonicalUrl: undefined,
+      coverImage: undefined
     })
   })
 })

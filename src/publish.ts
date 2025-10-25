@@ -130,7 +130,7 @@ async function makeHashnodeRequest(
 }
 
 export async function publishToHashnode(options: PublishOptions): Promise<PublishResponse> {
-  const { token, publicationId, title, content, tags = [], isDraft, existingDraftId, canonicalUrl, coverImage } = options
+  const { token, publicationId, title, subtitle, content, tags = [], isDraft, existingDraftId, canonicalUrl, coverImage } = options
 
   let mutation;
   let mutationVariables;
@@ -153,6 +153,7 @@ export async function publishToHashnode(options: PublishOptions): Promise<Publis
     mutationVariables = {
       input: {
         title,
+        subtitle,
         contentMarkdown: content,
         originalArticleURL: canonicalUrl,
         coverImageOptions: coverImage ? { coverImageURL: coverImage } : undefined,
@@ -171,6 +172,7 @@ export async function publishToHashnode(options: PublishOptions): Promise<Publis
      mutationVariables = {
        input: {
          title,
+         subtitle,
          contentMarkdown: content,
          originalArticleURL: canonicalUrl,
          coverImageOptions: coverImage ? { coverImageURL: coverImage } : undefined,

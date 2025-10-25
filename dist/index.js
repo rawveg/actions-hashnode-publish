@@ -23345,8 +23345,16 @@ function validateMarkdown(content) {
 }
 function parseMarkdown(content) {
   const { data: frontmatter, content: markdownContent } = (0, import_gray_matter.default)(content);
+  let title = frontmatter.title || "";
+  let subtitle = frontmatter.subtitle;
+  if (!subtitle && title.includes(": ")) {
+    const parts = title.split(": ");
+    title = parts[0];
+    subtitle = parts.slice(1).join(": ");
+  }
   return {
-    title: frontmatter.title || "",
+    title,
+    subtitle,
     content: markdownContent.trim(),
     tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
     articleId: frontmatter.articleId,
@@ -23413,7 +23421,7 @@ async function makeHashnodeRequest(token, query, variables) {
   return result.data;
 }
 async function publishToHashnode(options2) {
-  const { token, publicationId, title, content, tags = [], isDraft, existingDraftId, canonicalUrl, coverImage } = options2;
+  const { token, publicationId, title, subtitle, content, tags = [], isDraft, existingDraftId, canonicalUrl, coverImage } = options2;
   let mutation;
   let mutationVariables;
   let result;
@@ -23430,6 +23438,7 @@ async function publishToHashnode(options2) {
     mutationVariables = {
       input: {
         title,
+        subtitle,
         contentMarkdown: content,
         originalArticleURL: canonicalUrl,
         coverImageOptions: coverImage ? { coverImageURL: coverImage } : void 0,
@@ -23447,6 +23456,7 @@ async function publishToHashnode(options2) {
     mutationVariables = {
       input: {
         title,
+        subtitle,
         contentMarkdown: content,
         originalArticleURL: canonicalUrl,
         coverImageOptions: coverImage ? { coverImageURL: coverImage } : void 0,
